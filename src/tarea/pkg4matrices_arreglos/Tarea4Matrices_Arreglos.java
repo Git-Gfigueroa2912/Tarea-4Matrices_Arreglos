@@ -13,7 +13,8 @@ import java.security.SecureRandom;
  */
 public class Tarea4Matrices_Arreglos {
     public static Scanner entrada = new Scanner(System.in);
-
+    public static SecureRandom random = new SecureRandom();
+    
     public static void main(String[] args) {
         int opcion = 0;
         do{
@@ -29,15 +30,54 @@ public class Tarea4Matrices_Arreglos {
                 case 1:
                     System.out.println("Battleship");
                     
-                    int filas = 5;
-                    int columnas = 5;
-                    char[][] tablero = new char[filas][columnas];
+                    System.out.println("MODO DEL JUEGO");
+                    System.out.println("1. Un jugador");
+                    System.out.println("2. Dos jugadores");
+                    System.out.println("Ingrese el modo del juego");
+                    int modo = entrada.nextInt();
+                       
+                    if (modo == 1){
+                        char[][] tablero = new char[6][5];
+                        for(int i = 0; i < 6; i++){
+                           for(int j = 0; j < 5; j++){
+                               tablero[i][j] = '*';
+                            }
+                        }
+                        int barcoFila = random.nextInt(6);
+                    int barcoColumna = random.nextInt(5);
                     
-                    for(int i = 0; i < filas; i++){
-                        for(int j = 0; j < columnas; j++){
-                            tablero[i][j] = '*';
+                    boolean hundido = false;
+                    int intentos = 0;
+                    
+                    while(!hundido){
+                        System.out.println("Ingrese una fila: ");
+                        int fila = entrada.nextInt();
+                        System.out.println("Ingrese una columna: ");
+                        int columna = entrada.nextInt();
+                        
+                        if(fila < 0 || fila >= fila || columna < 0 || columna >= columna){
+                            System.out.println("La posicion esta fuera de rango");
+                            continue;
+                        }
+                        intentos++;
+                        
+                        if(fila == barcoFila && columna == barcoColumna){
+                            System.out.println(" El barco se hundio en " + intentos + " intentos! ");
+                            tablero[fila][columna] = 'X';
+                            hundido = true;
+                        }else{
+                            System.out.println("Bomba al agua");
+                            tablero[fila][columna] = '0';
+                        }
+                        for(int i = 0; i < 6; i++){
+                            for(int j = 0; j < 5; j++){
+                                System.out.print(tablero[i][j] + " ");
+                            }
                         }
                     }
+                }
+                    
+                        
             }
         }while (opcion != 0);
     }
