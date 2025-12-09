@@ -21,6 +21,7 @@ public class Tarea4Matrices_Arreglos {
             System.out.println("ELIJA UNO DE LOS JUEGOS"); 
             System.out.println("1. Battleship");
             System.out.println("2. Busca Minas");
+            System.out.println("0. Salir");
             System.out.println("Ingrese una opcion: ");
             opcion = entrada.nextInt();
             entrada.nextLine();
@@ -258,7 +259,14 @@ public class Tarea4Matrices_Arreglos {
                      }
                  }
             }
-    
+            
+            case 0->{
+                System.out.println("Saliendo del programa, gracias por jugar");
+            }
+            
+            default->{
+                System.out.println("Opcion invalida");
+            }
         }
      }while (opcion != 0);
     }    
