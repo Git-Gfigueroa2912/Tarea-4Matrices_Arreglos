@@ -103,11 +103,6 @@ public class Tarea4Matrices_Arreglos {
                     B[4][1] = '*';
                     B[5][0] = '*'; B[5][1] = '*'; B[5][2] = '*';
                     
-                    System.out.println("Desea modo silencioso : ");
-                    System.out.println("1. Si");
-                    System.out.println("2. No");
-                    silencioso = entrada.nextInt();
-                    
                     int daño1 = 0;
                     int daño2 = 0;
                     int turno = 1;
@@ -181,10 +176,74 @@ public class Tarea4Matrices_Arreglos {
                     }
                  }    
                         
-            }     
+            }
+                
             case 2->{
-                 System.out.println("Busca Minas");  
-            }    
+                 System.out.println("Busca Minas");
+                 
+                 System.out.println("Desea el modo silencioso");
+                 System.out.println("1. Si");
+                 System.out.println("2. No");
+                 int silencioso = entrada.nextInt();
+                 
+                 int numero = 6;
+                 char[][] minas = new char[numero][numero];
+                 boolean[][] visto = new boolean[numero][numero];
+                 
+                 for(int i = 0; i < numero; i++){
+                     for(int j = 0; j < numero; j++){
+                         minas[i][j] = '0';
+                         visto[i][j] = false;
+                     }
+                 }
+                 
+                 for(int i = 0; i < 5; i++){
+                     int fila, columna;
+                     do{
+                        fila = random.nextInt(numero);
+                        columna = random.nextInt(numero); 
+                        
+                     }while(minas[fila][columna] == '*');
+                     minas[fila][columna] = '*';
+                 }
+                 
+                 boolean boom = false;
+                 
+                 while(!boom){
+                     System.out.println("Ingrese la fila: ");
+                     int fila = entrada.nextInt();
+                     System.out.println("Ingrese la columna: ");
+                     int columna = entrada.nextInt();
+                     
+                     if(fila < 0 || fila >= numero || columna < 0 || columna >= numero){
+                         System.out.println("La posicion esta fuera de rango");
+                         continue;
+                     }
+                     
+                     visto[fila][columna] = true;
+                     
+                     if(minas[fila][columna] == '*'){
+                         System.out.println("BOOM !!!");
+                         boom = true;
+                     }else{
+                         System.out.println("Sin bomba");
+                     }
+                     
+                     if(silencioso == 2){
+                         for(int i = 0; i < numero; i++){
+                             for(int j = 0; j < numero; j++){
+                                if(visto[i][j]){
+                                    System.out.print(minas[i][j] + " "); 
+                                }else{
+                                    System.out.print("#");
+                                } 
+                             }
+                             System.out.println();
+                         }
+                     }
+                 }
+            }
+    
         }
      }while (opcion != 0);
     }    
