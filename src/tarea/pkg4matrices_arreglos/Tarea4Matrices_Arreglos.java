@@ -186,6 +186,11 @@ public class Tarea4Matrices_Arreglos {
                  System.out.println("2. No");
                  int silencioso = entrada.nextInt();
                  
+                 System.out.println("MODO DEL JUEGO");
+                 System.out.println("1. Modo Dinamico");
+                 System.out.println("2. Modo Estatico");
+                 int modo = entrada.nextInt();
+                 
                  int numero = 6;
                  char[][] minas = new char[numero][numero];
                  boolean[][] visto = new boolean[numero][numero];
@@ -197,14 +202,24 @@ public class Tarea4Matrices_Arreglos {
                      }
                  }
                  
-                 for(int i = 0; i < 5; i++){
-                     int fila, columna;
-                     do{
-                        fila = random.nextInt(numero);
-                        columna = random.nextInt(numero); 
-                        
-                     }while(minas[fila][columna] == '*');
-                     minas[fila][columna] = '*';
+                 if(modo == 1){
+                     int bombas_colocadas = 0;
+                     while(bombas_colocadas < 5){
+                         int fila = (int)(Math.random()*numero);
+                         int columna = (int)(Math.random()*numero);
+                         if(minas[fila][columna] != '*'){
+                             minas[fila][columna] = '*';
+                             bombas_colocadas++;
+                         } 
+                     }
+                 }
+                 
+                 if(modo == 2){
+                     minas[0][0] = '*';
+                     minas[1][0] = '*';
+                     minas[3][0] = '*';
+                     minas[5][0] = '*';
+                     minas[5][1] = '*';
                  }
                  
                  boolean boom = false;
